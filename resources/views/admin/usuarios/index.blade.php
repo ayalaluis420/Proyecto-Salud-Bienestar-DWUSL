@@ -99,7 +99,7 @@
                                             </form>
 
                                             <form method="POST" action="{{ route('usuarios.destroy', $u) }}"
-                                                  onsubmit="return confirm('¿Eliminar a {{ e($u->name) }}? Esta acción no se puede deshacer.');">
+                                                  data-confirm="¿Eliminar a {{ $u->name }}? Esta acción no se puede deshacer.">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>

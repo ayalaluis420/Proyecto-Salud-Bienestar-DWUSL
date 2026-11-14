@@ -32,3 +32,5 @@ Route::middleware(['auth:sanctum', 'activo'])->group(function () {
 
     // ... rutas de los otros módulos (actividad, objetivos, foro, etc.)
 });
+
+require __DIR__.'/planificacion_api.php';

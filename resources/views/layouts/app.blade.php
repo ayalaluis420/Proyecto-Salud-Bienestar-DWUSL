@@ -43,6 +43,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}" href="{{ route('usuarios.index') }}">Usuarios</a>
                                 </li>
+                                @foreach (['objetivos.index'=>'Objetivos','recordatorios.index'=>'Recordatorios','alimentos.index'=>'Alimentos','planes-comida.index'=>'Comidas'] as $ruta=>$texto)
+                                <li class="nav-item"><a class="nav-link {{ request()->routeIs($ruta) ? 'active' : '' }}" href="{{ route($ruta) }}">{{ $texto }}</a></li>
+                                @endforeach
+                                @if (Auth::user()->esAdmin())
+                                <li class="nav-item"><a class="nav-link" href="{{ route('planificacion.reportes') }}">Reportes</a></li>
+                                @endif
                             @endif
                         @endauth
                     </ul>

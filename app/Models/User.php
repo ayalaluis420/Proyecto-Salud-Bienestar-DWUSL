@@ -16,13 +16,15 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public const ROL_ADMIN = 'admin';
+
     public const ROL_MODERADOR = 'moderador';
+
     public const ROL_USUARIO = 'usuario';
 
     public const ROLES = [
-        self::ROL_ADMIN     => 'Administrador',
+        self::ROL_ADMIN => 'Administrador',
         self::ROL_MODERADOR => 'Moderador',
-        self::ROL_USUARIO   => 'Usuario',
+        self::ROL_USUARIO => 'Usuario',
     ];
 
     /**
@@ -48,12 +50,27 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',   // las contraseñas siempre se guardan con hash (bcrypt)
-            'activo'            => 'boolean',
+            'password' => 'hashed',   // las contraseñas siempre se guardan con hash (bcrypt)
+            'activo' => 'boolean',
         ];
     }
 
     // ---------------------------------------------------------------- Relaciones
+
+    public function objetivos()
+    {
+        return $this->hasMany(Objetivo::class);
+    }
+
+    public function recordatorios()
+    {
+        return $this->hasMany(Recordatorio::class);
+    }
+
+    public function planesComida()
+    {
+        return $this->hasMany(PlanComida::class);
+    }
 
     public function perfil(): HasOne
     {

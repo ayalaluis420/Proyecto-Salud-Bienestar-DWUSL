@@ -2,8 +2,12 @@
 
 Desarrollo Web usando Software Libre – ITCA-FEPADE · Proyecto 2
 
-Este repositorio contiene hoy el **Módulo 1 – Usuarios, autenticación y seguridad** (Miembro 1).
+Este repositorio contiene el **Módulo 1 – Usuarios, autenticación y seguridad** y el **Módulo 3 – Objetivos, recordatorios y comidas**.
 Los demás miembros agregan sus módulos sobre esta misma base.
+
+## Módulo 3: planificación y nutrición
+
+Consulta de objetivos, recordatorios y planes de comida; CRUD de alimentos; API privada de planificación; SweetAlert2 en todo el panel; reportes PDF/Excel. [Instalación, contrato y reglas](docs/Miembro3_Integracion.md) · [Manual del panel](docs/Manual_Usuario_Panel.md) · [Manual PDF](docs/Manual_Usuario_Panel.pdf) · [Colección Postman](docs/postman/Salud_Bienestar_Miembro3_Planificacion.postman_collection.json).
 
 ## Requisitos
 
@@ -53,7 +57,7 @@ Las contraseñas están en el seeder. **Cámbialas antes de cualquier despliegue
 | Form Requests y errores en Bootstrap | `app/Http/Requests/*`, `resources/views/admin/usuarios/_form.blade.php` |
 | Hash, CSRF, SQL seguro, cifrado | `User` (cast `hashed`), `@csrf`, scope `User::filtrar()`, `App\Casts\DecimalCifrado` |
 | Reporte PDF / Excel filtrable por rol y estado | `Admin/ReporteUsuarioController.php`, `app/Exports/UsuariosExport.php` |
-| Pruebas | `tests/Feature/*` → `php artisan test` (67 pruebas) |
+| Pruebas | `tests/Feature/*` → `php artisan test` (82 pruebas) |
 | Colección Postman | `docs/postman/` |
 | Introducción y Objetivos del documento | `docs/Introduccion_y_Objetivos.md` |
 
@@ -102,5 +106,5 @@ Rangos: edad 10–100 · altura 100–250 cm · peso 20–300 kg · sexo `mascul
 
 - **Miembro 2 (BD)**: las migraciones de este módulo son `*_add_rol_y_activo_to_users_table`, `*_create_perfiles_table` y la de `personal_access_tokens` (Sanctum). La FK de otras tablas debe apuntar a `users.id`.
 - **Miembro 4 (layout)**: `resources/views/layouts/app.blade.php` es una base mínima; conservar `@yield('content')`, `@include('partials.alertas')` y el enlace *Usuarios*. `home.blade.php` espera su dashboard.
-- **Miembro 3 (alertas)**: las confirmaciones de borrado usan `confirm()` y los mensajes son alertas Bootstrap (`partials/alertas`); pueden pasar a SweetAlert2.
+- **Miembro 3 (alertas)**: SweetAlert2 ya está integrado en las confirmaciones de borrado y en los mensajes de todo el panel (`resources/js/alertas.js`, `partials/alertas`).
 - Cada miembro agrega su línea en `DatabaseSeeder` y sus rutas API dentro del grupo `auth:sanctum` + `activo` de `routes/api.php`.
