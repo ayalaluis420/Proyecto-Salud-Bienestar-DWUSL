@@ -1,0 +1,11 @@
+@extends('layouts.app')
+@section('title','Alimentos')
+@section('content')
+<div class="container"><div class="d-flex justify-content-between align-items-center mb-3"><h1 class="h3">Catálogo de alimentos</h1>@if (auth()->user()->esAdmin())<a class="btn btn-primary" href="{{ route('alimentos.create') }}">Nuevo alimento</a>@endif</div>
+<p class="text-muted">Las calorías se expresan por porción, cuyo peso se indica en gramos.</p>
+<form method="GET" class="card card-body mb-3"><div class="row g-3 align-items-end"><div class="col-md-5"><label for="buscar" class="form-label">Nombre</label><input class="form-control" name="buscar" id="buscar" maxlength="150" value="{{ $filtros['buscar'] ?? '' }}"></div><div class="col-md-3"><label for="categoria" class="form-label">Categoría</label><select class="form-select" name="categoria" id="categoria"><option value="">Todas</option>@foreach ($categorias as $c)<option value="{{ $c }}" @selected(($filtros['categoria'] ?? '') === $c)>{{ ucfirst($c) }}</option>@endforeach</select></div><div class="col-md-4 d-flex gap-2"><button class="btn btn-primary">Filtrar</button><a href="{{ route('alimentos.index') }}" class="btn btn-outline-secondary">Limpiar</a></div></div></form>
+<div class="card table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Alimento</th><th>Categoría</th><th>Porción (g)</th><th>Calorías (kcal)</th>@if (auth()->user()->esAdmin())<th>Acciones</th>@endif</tr></thead><tbody>
+@forelse ($alimentos as $a)<tr><td>{{ $a->nombre }}</td><td>{{ ucfirst($a->categoria) }}</td><td>{{ $a->porcion_gramos }}</td><td>{{ $a->calorias }}</td>@if (auth()->user()->esAdmin())<td><div class="d-flex gap-2"><a class="btn btn-sm btn-outline-primary" href="{{ route('alimentos.edit',$a) }}">Editar</a><form method="POST" action="{{ route('alimentos.destroy',$a) }}" data-confirm="¿Eliminar el alimento {{ $a->nombre }}? Esta acción no se puede deshacer.">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger">Eliminar</button></form></div></td>@endif</tr>
+@empty<tr><td colspan="5" class="text-center text-muted py-4">No se encontraron alimentos.</td></tr>@endforelse
+</tbody></table></div><div class="mt-3">{{ $alimentos->links() }}</div></div>
+@endsection

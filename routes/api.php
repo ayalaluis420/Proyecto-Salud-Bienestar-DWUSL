@@ -37,3 +37,5 @@ Route::middleware(['auth:sanctum', 'activo'])->group(function () {
     Route::get('actividades', [ActividadFisicaController::class, 'index']);
     Route::post('actividades', [ActividadFisicaController::class, 'store']);
 });
+
+require __DIR__.'/planificacion_api.php';

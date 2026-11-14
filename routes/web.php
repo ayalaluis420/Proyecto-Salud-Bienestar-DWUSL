@@ -59,3 +59,5 @@ Route::middleware(['auth', 'activo', 'es_moderador'])->group(function () {
             ->only(['index', 'show']);
     });
 });
+
+require __DIR__.'/planificacion_web.php';
