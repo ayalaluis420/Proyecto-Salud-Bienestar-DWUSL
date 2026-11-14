@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UsuariosSeeder::class,
-            PlanificacionSeeder::class,   // Miembro 1
+            UsuariosSeeder::class,   // Miembro 1
+            TipoEjercicioSeeder::class,  // Miembro 2
         ]);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PerfilController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ActividadFisicaController;   
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::middleware(['auth:sanctum', 'activo'])->group(function () {
     Route::put('perfil', [PerfilController::class, 'update']);
 
     // ... rutas de los otros módulos (actividad, objetivos, foro, etc.)
+
+    //Actividades fisicas
+    Route::get('actividades', [ActividadFisicaController::class, 'index']);
+    Route::post('actividades', [ActividadFisicaController::class, 'store']);
 });
 
 require __DIR__.'/planificacion_api.php';

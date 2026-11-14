@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -28,26 +29,54 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Salud y Bienestar') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @auth
                             @if (Auth::user()->esPersonal())
+
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Inicio</a>
+                                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
+                                       href="{{ route('home') }}">
+                                        Inicio
+                                    </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}" href="{{ route('usuarios.index') }}">Usuarios</a>
+                                    <a class="nav-link {{ request()->routeIs('usuarios.*') ? 'active' : '' }}"
+                                       href="{{ route('usuarios.index') }}">
+                                        Usuarios
+                                    </a>
                                 </li>
-                                @foreach (['objetivos.index'=>'Objetivos','recordatorios.index'=>'Recordatorios','alimentos.index'=>'Alimentos','planes-comida.index'=>'Comidas'] as $ruta=>$texto)
-                                <li class="nav-item"><a class="nav-link {{ request()->routeIs($ruta) ? 'active' : '' }}" href="{{ route($ruta) }}">{{ $texto }}</a></li>
-                                @endforeach
+
                                 @if (Auth::user()->esAdmin())
-                                <li class="nav-item"><a class="nav-link" href="{{ route('planificacion.reportes') }}">Reportes</a></li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->routeIs('tiposEjercicio.*') ? 'active' : '' }}"
+                                           href="{{ route('tiposEjercicio.index') }}">
+                                            Tipos de ejercicios
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ request()->routeIs('actividadesEntrenamientos.*') ? 'active' : '' }}"
+                                           href="{{ route('actividadesEntrenamientos.index') }}">
+                                            Actividades y entrenamientos
+                                        </a>
+                                    </li>
+
                                 @endif
                             @endif
                         @endauth
@@ -55,32 +84,55 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">
+                                        {{ __('Login') }}
+                                    </a>
                                 </li>
                             @endif
                         @else
+
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown"
+                                   class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
+                                   v-pre>
+
                                     {{ Auth::user()->name }}
-                                    <span class="badge text-bg-secondary">{{ Auth::user()->nombre_rol }}</span>
+
+                                    <span class="badge text-bg-secondary">
+                                        {{ Auth::user()->nombre_rol }}
+                                    </span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                <div class="dropdown-menu dropdown-menu-end"
+                                     aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item"
+                                       href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                       document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form"
+                                          action="{{ route('logout') }}"
+                                          method="POST"
+                                          class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -95,5 +147,9 @@
             @yield('content')
         </main>
     </div>
+
+    {{-- Scripts adicionales de las vistas --}}
+    @stack('scripts')
+
 </body>
 </html>
