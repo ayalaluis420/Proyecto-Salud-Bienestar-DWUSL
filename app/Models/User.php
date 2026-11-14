@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -106,5 +107,15 @@ class User extends Authenticatable
                 $like = '%'.addcslashes($buscar, '\\%_').'%';
                 $q->where(fn (Builder $w) => $w->where('name', 'like', $like)->orWhere('email', 'like', $like));
             });
+    }
+
+    public function actividadesFisicas(): HasMany
+    {
+        return $this->hasMany(ActividadFisica::class);
+    }
+
+    public function entrenamientos(): HasMany
+    {
+        return $this->hasMany(Entrenamiento::class);
     }
 }

@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TipoEjercicioController;
+use App\Http\Controllers\Admin\ActividadEntrenamientoController;
+use App\Http\Controllers\Admin\ReporteActividadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +44,13 @@ Route::middleware(['auth', 'activo', 'es_moderador'])->group(function () {
             Route::patch('usuarios/{usuario}/toggle', [UsuarioController::class, 'toggle'])
                 ->name('usuarios.toggle')
                 ->whereNumber('usuario');
+
+            // CRUD de tipos de ejercicios
+            Route::resource('tiposEjercicio', TipoEjercicioController::class)->except(['show']);
+            
+            Route::get('actividades-entrenamientos', [ActividadEntrenamientoController::class, 'index'])->name('actividadesEntrenamientos.index');
+
+            Route::get('actividades-entrenamientos/reporte/pdf', [ReporteActividadController::class, 'pdf'])->name('actividadesEntrenamientos.reporte.pdf');
         });
 
         // ---- Administradores y moderadores: solo consulta
