@@ -1,0 +1,69 @@
+// Layout del panel (Miembro 4)
+$panel-verde: #1f7a5a;
+$panel-verde-oscuro: #155a42;
+$panel-ancho-menu: 250px;
+
+.panel-navbar {
+    background: linear-gradient(90deg, $panel-verde-oscuro, $panel-verde);
+}
+
+.panel-cuerpo {
+    display: flex;
+    min-height: calc(100vh - 56px);
+}
+
+.panel-contenido {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.panel-sidebar {
+    background: #fff;
+    border-right: 1px solid #e5e7eb;
+
+    .panel-sidebar-titulo {
+        padding: 0.75rem 1.25rem 0.25rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #6b7280;
+    }
+
+    .nav-link {
+        padding: 0.45rem 1.25rem;
+        color: #374151;
+        border-left: 3px solid transparent;
+
+        &:hover {
+            background: #f3f4f6;
+        }
+
+        &.active {
+            color: $panel-verde-oscuro;
+            font-weight: 700;
+            background: #e8f5ef;
+            border-left-color: $panel-verde;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .panel-sidebar {
+        flex: 0 0 $panel-ancho-menu;
+        width: $panel-ancho-menu;
+    }
+}
+
+// Tarjetas del dashboard
+.tarjeta-resumen {
+    border: 0;
+    border-left: 4px solid $panel-verde;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    .valor {
+        font-size: 1.9rem;
+        font-weight: 700;
+        line-height: 1.1;
+    }
+}
