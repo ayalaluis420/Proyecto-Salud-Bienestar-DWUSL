@@ -61,3 +61,4 @@ Route::middleware(['auth', 'activo', 'es_moderador'])->group(function () {
 });
 
 require __DIR__.'/planificacion_web.php';
+require __DIR__.'/comunidad_web.php';
