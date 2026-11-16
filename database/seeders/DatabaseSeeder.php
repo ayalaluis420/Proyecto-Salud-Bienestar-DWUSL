@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsuariosSeeder::class,   // Miembro 1
             TipoEjercicioSeeder::class,  // Miembro 2
             ForoSeeder::class,           // Miembro 4
+            ConsejoSeeder::class,        // Miembro 4
         ]);
     }
 }
