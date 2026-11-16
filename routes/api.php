@@ -39,3 +39,4 @@ Route::middleware(['auth:sanctum', 'activo'])->group(function () {
 });
 
 require __DIR__.'/planificacion_api.php';
+require __DIR__.'/comunidad_api.php';
